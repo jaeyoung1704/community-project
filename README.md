@@ -17,7 +17,6 @@
 관리자 권한으로 게시판,게시글 crud에 관한 내용 : AdminController   
 
 ## URL
-/ : 비로그인시 member/login 으로 리다이렉트, 로그인돼있으면 board로 리다이렉트   
 get-board/list : 게시판 목록 조회   
 get-board/(게시판번호)?sort=(정렬방식) : 해당게시판의 게시글목록 조회. 등록순,일간 조회순, 주간 조회순 가능.
 get-board/post/(게시글번호) : 게시글 내용 및 댓글 조회   
