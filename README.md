@@ -40,3 +40,9 @@ post-member/login : 로그인
 get-member/myPage: 내정보 조회   
 patch-member/myPost: 내가 쓴 글 조회   
 patch-member/myComment: 내가 쓴 댓글 조회   
+
+
+## ERD
+
+![erd](./erd.png)
+
