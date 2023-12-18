@@ -1,0 +1,26 @@
+server:
+  port: 8081
+  servelet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+      
+spring:
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/community?serverTimezone=Asia/Seoul
+    username: root
+    password: 1704
+  jpa:
+    properties:
+      hibernate:
+#      ddl-auto: create #프로그램 재시작시 테이블 비우고 다시 생성
+        show_sql : true
+        format_sql: true
+        
