@@ -3,7 +3,6 @@ package com.zerobase.commu.intercepter;
 import java.io.IOException;
 
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.zerobase.commu.dto.LoginUser;
 import com.zerobase.commu.exception.ErrorCode;

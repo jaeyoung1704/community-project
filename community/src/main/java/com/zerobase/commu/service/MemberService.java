@@ -1,15 +1,8 @@
 package com.zerobase.commu.service;
 
-import java.net.http.HttpRequest;
-import java.util.Optional;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.zerobase.commu.dto.LoginUser;
 import com.zerobase.commu.dto.MemberDto;
@@ -21,9 +14,7 @@ import com.zerobase.commu.repo.MemberRepo;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -63,6 +54,15 @@ public class MemberService {
 	LoginUser loginUser = new LoginUser(userFromDB.getId(), userFromDB.isAdmin());
 	session.setAttribute("loginUser", loginUser);
 	return loginUser;
+    }
+
+    public void logOut(HttpServletRequest request) {
+	// 세션이 없으면 실행안함
+	HttpSession session = request.getSession(false);
+	if (session == null)
+	    return;
+	// 로그아웃
+	session.removeAttribute("loginUser");
     }
 
     // 세션에서 로그인 정보(아이디,권한만) 가져오기

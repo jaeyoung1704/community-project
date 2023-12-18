@@ -9,10 +9,8 @@ import com.zerobase.commu.entity.Post;
 import com.zerobase.commu.repo.PostRepo;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Component
-@Slf4j
 @RequiredArgsConstructor
 public class HitsScheduler {
     private final PostRepo postRepo;
@@ -32,5 +30,4 @@ public class HitsScheduler {
 	postList.forEach(x -> x.setHitsWeek(0l));
 	postRepo.saveAllAndFlush(postList);
     }
-
 }

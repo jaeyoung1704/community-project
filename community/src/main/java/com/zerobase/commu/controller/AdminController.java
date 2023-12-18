@@ -10,9 +10,7 @@ import com.zerobase.commu.service.AdminService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @RestController
 @RequestMapping("/admin")
 @RequiredArgsConstructor

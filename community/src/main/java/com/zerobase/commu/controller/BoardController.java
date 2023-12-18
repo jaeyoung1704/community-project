@@ -21,10 +21,9 @@ import com.zerobase.commu.service.CommentService;
 import com.zerobase.commu.service.PostService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @RestController
 @RequestMapping("/board")
 @RequiredArgsConstructor
@@ -50,9 +49,11 @@ public class BoardController {
 
     // 게시글 상세 조회
     @GetMapping("/post/{postNo}")
-    public PostDetail readPostDetail(@PathVariable("postNo") long postNo) {
+    public PostDetail readPostDetail(@PathVariable("postNo") long postNo,
+				     HttpServletRequest request,
+				     HttpServletResponse response) {
 
-	return postService.readPost(postNo);
+	return postService.readPost(postNo, request, response);
     }
 
     // 게시글 입력

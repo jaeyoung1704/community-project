@@ -32,6 +32,13 @@ public class MemberController {
 	return memberService.login(member, request);
     }
 
+    // 로그아웃
+    @PostMapping("/logOut")
+    public void logOut(HttpServletRequest request) {
+	log.info("로그아웃");
+	memberService.logOut(request);
+    }
+
     // 내정보 조회
     @GetMapping("/myPage")
     public MemberDto myPage(HttpServletRequest request) {

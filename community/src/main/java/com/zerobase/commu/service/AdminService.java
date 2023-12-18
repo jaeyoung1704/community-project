@@ -1,37 +1,25 @@
 package com.zerobase.commu.service;
 
-import java.net.http.HttpRequest;
-import java.util.Optional;
-
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.zerobase.commu.dto.BoardDto;
 import com.zerobase.commu.dto.MemberDto;
 import com.zerobase.commu.dto.PostDetail;
 import com.zerobase.commu.entity.Board;
-import com.zerobase.commu.entity.Member;
 import com.zerobase.commu.entity.Post;
 import com.zerobase.commu.exception.ErrorCode;
 import com.zerobase.commu.exception.CommuException;
 import com.zerobase.commu.repo.BoardRepo;
-import com.zerobase.commu.repo.MemberRepo;
 import com.zerobase.commu.repo.PostRepo;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AdminService {
-    private final MemberRepo memberRepo;
     private final PostRepo postRepo;
     private final BoardRepo boardRepo;
     private final MemberService memberService;

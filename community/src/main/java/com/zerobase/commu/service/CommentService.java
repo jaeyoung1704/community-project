@@ -5,17 +5,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.zerobase.commu.dto.CommentDto;
-import com.zerobase.commu.dto.MemberDto;
-import com.zerobase.commu.dto.PostDetail;
-import com.zerobase.commu.dto.PostSimple;
+import com.zerobase.commu.dto.*;
 import com.zerobase.commu.entity.Comment;
-import com.zerobase.commu.entity.Post;
 import com.zerobase.commu.exception.CommuException;
 import com.zerobase.commu.exception.ErrorCode;
-import com.zerobase.commu.repo.BoardRepo;
 import com.zerobase.commu.repo.CommentRepo;
-import com.zerobase.commu.repo.MemberRepo;
 import com.zerobase.commu.repo.PostRepo;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class CommentService {
     private final CommentRepo commentRepo;
-    private final MemberRepo memberRepo;
     private final MemberService memberService;
     private final PostRepo postRepo;
 

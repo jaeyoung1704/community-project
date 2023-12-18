@@ -1,29 +1,30 @@
 package com.zerobase.commu.service;
 
-import java.net.http.HttpRequest;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.zerobase.commu.dto.*;
-import com.zerobase.commu.entity.*;
-import com.zerobase.commu.exception.ErrorCode;
+import com.zerobase.commu.dto.BoardDto;
+import com.zerobase.commu.dto.MemberDto;
+import com.zerobase.commu.dto.PostDetail;
+import com.zerobase.commu.dto.PostSimple;
+import com.zerobase.commu.entity.Post;
 import com.zerobase.commu.exception.CommuException;
-import com.zerobase.commu.repo.*;
+import com.zerobase.commu.exception.ErrorCode;
+import com.zerobase.commu.repo.BoardRepo;
+import com.zerobase.commu.repo.PostRepo;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PostService {
-    private final MemberRepo memberRepo;
     private final PostRepo postRepo;
     private final BoardRepo boardRepo;
     private final MemberService memberService;
@@ -49,7 +50,9 @@ public class PostService {
     }
 
     // 특정 게시글 조회
-    public PostDetail readPost(long postNo) {
+    @Transactional
+    public PostDetail readPost(long postNo, HttpServletRequest request,
+			       HttpServletResponse response) {
 	// 게시글 번호로 게시글 가져오고 없으면 예외 반환
 	Post post = postRepo.findById(postNo)
 	    .orElseThrow(() -> new CommuException(ErrorCode.NO_SUCH_POST));
@@ -59,6 +62,30 @@ public class PostService {
 	post.setHitsWeek(post.getHitsWeek() + 1);
 	postRepo.save(post);
 
+//	// 이미 본 게시글인지 조회
+//	Cookie[] cookies = request.getCookies();
+//	Cookie viewedPost = null;
+//	if (cookies != null)
+//	    for (Cookie cookie : cookies) {
+//		if (cookie.getName().equals("viewedPost")) {
+//		    log.info("발견");
+//		    viewedPost = cookie;
+//		}
+//	    }
+//	if (viewedPost == null) {
+//	    viewedPost = new Cookie("viewedPost", "밸류");
+//	    // 다음날 0시에 만료되는 쿠키
+//	    LocalDateTime expires = LocalDateTime.now();
+//	    expires = expires.plusDays(1);
+//	    expires = expires.withHour(0);
+//	    expires = expires.withMinute(0);
+//	    expires = expires.withSecond(0);
+//	    viewedPost.setAttribute("expires", expires.toString());
+//	    viewedPost.setMaxAge(60 * 3600 * 24);
+//	    response.addCookie(viewedPost);
+//	}
+//	log.info("쿠키이름:{}, 값:{}, maxage:{},속성들:{}", viewedPost.getName(),
+//	    viewedPost.getValue(), viewedPost.getMaxAge(), viewedPost.getAttributes());
 	// 댓글 조회
 	PostDetail dto = post.toDetail();
 	dto.setComments(commentService.CommentByPost(postNo));
