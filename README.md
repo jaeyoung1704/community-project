@@ -19,7 +19,7 @@
 ## URL
 / : 비로그인시 member/login 으로 리다이렉트, 로그인돼있으면 board로 리다이렉트   
 get-board/list : 게시판 목록 조회   
-get-board/(게시판번호) : 해당게시판의 게시글목록 조회   
+get-board/(게시판번호)?sort=(정렬방식) : 해당게시판의 게시글목록 조회. 등록순,일간 조회순, 주간 조회순 가능.
 get-board/post/(게시글번호) : 게시글 내용 및 댓글 조회   
 post-board/(게시판번호) : 게시글 작성   
 patch-board/(게시글번호) :게시글 수정(본인만 가능)   
